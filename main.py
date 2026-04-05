@@ -32,7 +32,7 @@ if len(symptoms) < 7: # input must be 7 characters long
 
 response = client.chat.completions.create(
     model = "gpt-4o-mini", # calls to model type from OpenAI we are calling
-    messages = [
+    messages = [ # dictionary to seperate content for a user roles
         {"role" : "system", "content": SYSTEM_PROMPT}, # Role is the agent if SYSTEM_PROMPT is accessible which also means no access to user role content
         {"role" : "user", "content": symptoms} # if user input for symptom is touched we know that role will be user role no access to system role content
     ]
@@ -48,9 +48,10 @@ try:
     if result == None:
         print(["no response received"]) #handles empty cases
     else:
-        data = json.loads(result or "")   # Only parse when result actually exists
-        print(result) # prints first message choice
-        print(data["severity"])
+        data = json.loads(result or "")   # Only parse when result actually exists e
+        print("* " + data["severity"])
+        print("* " + data["recommendation"])
+        print("* " + data["explanation"])
 except json.JSONDecodeError:  # catches broken JSON
     print("the AI returned something that wasn't a valid JSON") 
 
