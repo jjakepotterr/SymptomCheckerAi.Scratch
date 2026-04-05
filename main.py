@@ -1,6 +1,10 @@
 from openai import OpenAI # imports the OpenAI client library
+from dotenv import load_dotenv
+import os # imports a build way to interact with the underlying operating system
+import json
 
-client = OpenAI(api_key="your-key-here") # client initialization with your API key
+load_dotenv()
+client = OpenAI(api_key = os.getenv("OPENAI_API_KEY")) # client initialization with your API key
 
 #3 things every API call needs = key, model, prompt
 
@@ -32,4 +36,6 @@ response = client.chat.completions.create(
 
 result = response.choices[0].message.content # When answer is created multiple messages are made, here is where we choose first prompt to ensure efficiency
 
+data = json.loads(result or "")
 print(result) # prints first message choice
+print(data["severity"])
