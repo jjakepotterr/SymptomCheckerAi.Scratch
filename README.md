@@ -2,5 +2,8 @@
 
 Logic behind the SymptomCHecker.Ai
 
-https://github.com/user-attachments/assets/3dd20f64-f0a3-4464-8481-f5fb190062ba
+
+
+Uploading Screen Recording 2026-04-05 at 1.41.56 AM.mov…
+
 
