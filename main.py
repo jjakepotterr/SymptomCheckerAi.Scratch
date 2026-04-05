@@ -48,8 +48,8 @@ try:
     if result == None:
         print(["no response received"]) #handles empty cases
     else:
-        data = json.loads(result or "")   # Only parse when result actually exists e
-        print("* " + data["severity"])
+        data = json.loads(result or "")   # Only parse when result actually exists 
+        print("* " + data["severity"]) # prints the needed fields
         print("* " + data["recommendation"])
         print("* " + data["explanation"])
 except json.JSONDecodeError:  # catches broken JSON
