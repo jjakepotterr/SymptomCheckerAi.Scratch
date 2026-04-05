@@ -26,6 +26,10 @@ Return your response in strict JSON format with the following fields:
 symptoms = input("describe your symptoms: ") #user input for symptoms
 
 
+if len(symptoms) < 7: # input must be 7 characters long
+    print("Invalid input. Please describe a real symptom you are feeling.")
+    exit()
+
 response = client.chat.completions.create(
     model = "gpt-4o-mini", # calls to model type from OpenAI we are calling
     messages = [
@@ -36,6 +40,18 @@ response = client.chat.completions.create(
 
 result = response.choices[0].message.content # When answer is created multiple messages are made, here is where we choose first prompt to ensure efficiency
 
-data = json.loads(result or "")
-print(result) # prints first message choice
-print(data["severity"])
+
+
+
+try:
+    
+    if result == None:
+        print(["no response received"]) #handles empty cases
+    else:
+        data = json.loads(result or "")   # Only parse when result actually exists
+        print(result) # prints first message choice
+        print(data["severity"])
+except json.JSONDecodeError:  # catches broken JSON
+    print("the AI returned something that wasn't a valid JSON") 
+
+
